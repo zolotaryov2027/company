@@ -8,9 +8,9 @@ const Bookmark = () => {
     <>
       <button className="btn btn-sm" onClick={handleFavorites}>
         {favorites ? (
-          <i class="bi bi-bookmark-check-fill"></i>
+          <i className="bi bi-bookmark-check-fill"></i>
         ) : (
-          <i class="bi bi-bookmark-check"></i>
+          <i className="bi bi-bookmark-check"></i>
         )}
       </button>
     </>
