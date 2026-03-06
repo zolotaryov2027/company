@@ -26,8 +26,12 @@ const Users = ({ users, onItemDelete }) => {
   };
 
   const usersFiltered = selectedProf
-    ? users.filter((user) => user.profession === selectedProf)
+    ? users.filter(
+        (user) =>
+          JSON.stringify(user.profession) === JSON.stringify(selectedProf),
+      )
     : users;
+
   const count = usersFiltered.length;
   const userCrop = paginate(usersFiltered, currentPage, pageSize);
 
