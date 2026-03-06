@@ -5,6 +5,7 @@ import SearchStatus from "./searchStatus";
 import User from "./user";
 import Pagination from "./pagination";
 import GroupList from "./groupList";
+import UserTable from "./userTables";
 const Users = ({ users, onItemDelete }) => {
   const [professions, setProfessions] = useState();
   const [currentPage, setCurrentPage] = useState(1);
@@ -56,21 +57,7 @@ const Users = ({ users, onItemDelete }) => {
       <div className="column-right flex-grow-1 m-2">
         <SearchStatus length={count} />
         {count > 0 && (
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">Имя</th>
-                <th scope="col">Качества</th>
-                <th scope="col">Профессия</th>
-                <th scope="col">Встретился, раз</th>
-                <th scope="col">Оценка</th>
-                <th scope="col"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <User users={userCrop} onUserDelete={onItemDelete} />
-            </tbody>
-          </table>
+          <UserTable users={userCrop} onItemDelete={onItemDelete} />
         )}
         <div className="d-flex justify-content-center">
           <Pagination
