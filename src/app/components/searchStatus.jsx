@@ -1,4 +1,4 @@
-const SearchStatus = ({ users }) => {
+const SearchStatus = ({ length }) => {
   const renderPhrase = (number) => {
     const lastNumber = Number(number.toString().slice(-1));
     if (number > 4 && number < 15) return "Человек тусанет";
@@ -7,9 +7,9 @@ const SearchStatus = ({ users }) => {
   };
   return (
     <h2>
-      <span className={"badge bg-" + (users.length > 0 ? "primary" : "danger")}>
-        {users.length > 0
-          ? `${users.length} ${renderPhrase(users.length)} с тобой сегодня`
+      <span className={"badge bg-" + (length > 0 ? "primary" : "danger")}>
+        {length > 0
+          ? `${length} ${renderPhrase(length)} с тобой сегодня`
           : "С тобой не кто не тусанет"}
       </span>
     </h2>

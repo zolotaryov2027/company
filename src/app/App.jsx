@@ -4,7 +4,6 @@ import Users from "./components/users";
 const App = () => {
   const [users, setUsers] = useState();
   useEffect(() => {
-    console.log("start");
     api.users.fetchAll().then((data) => setUsers(data));
   }, []);
   const handleDelete = (userId) => {

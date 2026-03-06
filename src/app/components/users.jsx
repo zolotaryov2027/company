@@ -7,9 +7,10 @@ import Pagination from "./pagination";
 import GroupList from "./groupList";
 const Users = ({ users, onItemDelete }) => {
   const [professions, setProfessions] = useState();
-  const count = users.length;
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 4;
+  const pageSize = 2;
+
+  const [selectedProf, setSelectedProf] = useState();
 
   useEffect(() => {
     api.professions.fetchAll().then((data) => setProfessions(data));
@@ -19,39 +20,64 @@ const Users = ({ users, onItemDelete }) => {
     setCurrentPage(pageIndex);
   };
 
-  const handleProfessionSelect = (params) => {
-    console.log(params);
+  const handleProfessionSelect = (item) => {
+    setSelectedProf(item);
+    setCurrentPage(1);
   };
-  const userCrop = paginate(users, currentPage, pageSize);
+
+  const usersFiltered = selectedProf
+    ? users.filter((user) => user.profession === selectedProf)
+    : users;
+  const count = usersFiltered.length;
+  const userCrop = paginate(usersFiltered, currentPage, pageSize);
+
+  const clearFilter = () => {
+    setSelectedProf(undefined);
+  };
 
   return (
-    <>
-      <GroupList items={professions} onItemsSelect={handleProfessionSelect} />
-      <SearchStatus users={users} />
-      {count > 0 && (
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Имя</th>
-              <th scope="col">Качества</th>
-              <th scope="col">Профессия</th>
-              <th scope="col">Встретился, раз</th>
-              <th scope="col">Оценка</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <User users={userCrop} onUserDelete={onItemDelete} />
-          </tbody>
-        </table>
+    <div className="d-flex">
+      {professions && (
+        <div className="column-left m-2">
+          <GroupList
+            items={professions}
+            onItemsSelect={handleProfessionSelect}
+            selectedItem={selectedProf}
+          />
+          <button className="btn btn-secondary mt-2" onClick={clearFilter}>
+            Очистить
+          </button>
+        </div>
       )}
-      <Pagination
-        itemsCount={count}
-        pageSize={pageSize}
-        currentPage={currentPage}
-        onPageChange={handlePageChange}
-      />
-    </>
+      <div className="column-right flex-grow-1 m-2">
+        <SearchStatus length={count} />
+        {count > 0 && (
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">Имя</th>
+                <th scope="col">Качества</th>
+                <th scope="col">Профессия</th>
+                <th scope="col">Встретился, раз</th>
+                <th scope="col">Оценка</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <User users={userCrop} onUserDelete={onItemDelete} />
+            </tbody>
+          </table>
+        )}
+        <div className="d-flex justify-content-center">
+          <Pagination
+            itemsCount={count}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 
