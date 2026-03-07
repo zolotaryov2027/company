@@ -1,5 +1,5 @@
 import User from "./user";
-const UserTable = ({ users }, onItemDelete) => {
+const UserTable = ({ users, onItemDelete }) => {
   return (
     <table className="table">
       <thead>
