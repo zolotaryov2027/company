@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import paginate from "../utils/paginate";
 import api from "../api";
 import SearchStatus from "./searchStatus";
-import User from "./user";
 import Pagination from "./pagination";
 import GroupList from "./groupList";
 import UserTable from "./userTables";
