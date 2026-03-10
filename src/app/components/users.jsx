@@ -25,6 +25,10 @@ const Users = ({ users, onItemDelete }) => {
     setCurrentPage(1);
   };
 
+  const handleSort = (item) => {
+    console.log(item);
+  };
+
   const usersFiltered = selectedProf
     ? users.filter(
         (user) =>
@@ -56,7 +60,11 @@ const Users = ({ users, onItemDelete }) => {
       <div className="column-right flex-grow-1 m-2">
         <SearchStatus length={count} />
         {count > 0 && (
-          <UserTable users={userCrop} onItemDelete={onItemDelete} />
+          <UserTable
+            users={userCrop}
+            onSort={handleSort}
+            onItemDelete={onItemDelete}
+          />
         )}
         <div className="d-flex justify-content-center">
           <Pagination
