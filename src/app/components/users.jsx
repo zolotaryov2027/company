@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import paginate from "../utils/paginate";
 import api from "../api";
+import _ from "lodash";
 import SearchStatus from "./searchStatus";
 import Pagination from "./pagination";
 import GroupList from "./groupList";
@@ -8,7 +9,8 @@ import UserTable from "./userTables";
 const Users = ({ users, onItemDelete }) => {
   const [professions, setProfessions] = useState();
   const [currentPage, setCurrentPage] = useState(1);
-  const pageSize = 2;
+  const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
+  const pageSize = 8;
 
   const [selectedProf, setSelectedProf] = useState();
 
@@ -26,7 +28,7 @@ const Users = ({ users, onItemDelete }) => {
   };
 
   const handleSort = (item) => {
-    console.log(item);
+    setSortBy(item);
   };
 
   const usersFiltered = selectedProf
@@ -37,7 +39,8 @@ const Users = ({ users, onItemDelete }) => {
     : users;
 
   const count = usersFiltered.length;
-  const userCrop = paginate(usersFiltered, currentPage, pageSize);
+  const sortedUsers = _.orderBy(usersFiltered, [sortBy.iter], [sortBy.order]);
+  const userCrop = paginate(sortedUsers, currentPage, pageSize);
 
   const clearFilter = () => {
     setSelectedProf(undefined);
@@ -63,6 +66,7 @@ const Users = ({ users, onItemDelete }) => {
           <UserTable
             users={userCrop}
             onSort={handleSort}
+            selectedSort={sortBy}
             onItemDelete={onItemDelete}
           />
         )}
