@@ -1,15 +1,26 @@
 import User from "./user";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
-const UserTable = ({ users, onSort, selectedSort }) => {
+import Bookmark from "./bookmark";
+const UserTable = ({ users, onSort, selectedSort, onUserDelete }) => {
   const columns = {
     name: { path: "name", name: "Имя" },
     qualities: { name: "Качества" },
     professions: { path: "profession.name", name: "Профессия" },
     completedMeetings: { path: "completedMeetings", name: "Встретился, раз" },
     rate: { path: "rate", name: "Оценка" },
-    bookmark: { path: "bookmark", name: "Избранное" },
-    delete: {},
+    bookmark: { path: "bookmark", name: "Избранное", component: <Bookmark /> },
+    delete: {
+      component: (user) => (
+        <button
+          type="button"
+          className="btn btn-danger"
+          onClick={() => onUserDelete(user._id)}
+        >
+          Удалить
+        </button>
+      ),
+    },
   };
   return (
     <table className="table">

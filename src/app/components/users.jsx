@@ -39,7 +39,7 @@ const Users = ({ users, onItemDelete }) => {
     : users;
 
   const count = usersFiltered.length;
-  const sortedUsers = _.orderBy(usersFiltered, [sortBy.iter], [sortBy.order]);
+  const sortedUsers = _.orderBy(usersFiltered, [sortBy.path], [sortBy.order]);
   const userCrop = paginate(sortedUsers, currentPage, pageSize);
 
   const clearFilter = () => {
@@ -68,6 +68,7 @@ const Users = ({ users, onItemDelete }) => {
             onSort={handleSort}
             selectedSort={sortBy}
             onItemDelete={onItemDelete}
+            onUserDelete={onItemDelete}
           />
         )}
         <div className="d-flex justify-content-center">

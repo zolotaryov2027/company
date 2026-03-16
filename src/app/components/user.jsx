@@ -1,7 +1,7 @@
 import Qualitie from "./qualities";
 import Bookmark from "./bookmark";
 
-const User = ({ users, onUserDelete }) => {
+const User = ({ users }) => {
   return (
     <>
       {users.map((user) => (
@@ -16,15 +16,7 @@ const User = ({ users, onUserDelete }) => {
           <td>
             <Bookmark />
           </td>
-          <td>
-            <button
-              type="button"
-              className="btn btn-danger"
-              onClick={() => onUserDelete(user._id)}
-            >
-              Удалить
-            </button>
-          </td>
+          <td></td>
         </tr>
       ))}
     </>
