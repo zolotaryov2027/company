@@ -1,8 +1,6 @@
-import User from "./user";
-import TableHeader from "./tableHeader";
-import TableBody from "./tableBody";
 import Bookmark from "./bookmark";
 import QualitiesList from "./qualitiesList";
+import Table from "./table";
 
 const UserTable = ({ users, onSort, selectedSort, onUserDelete }) => {
   const columns = {
@@ -28,13 +26,15 @@ const UserTable = ({ users, onSort, selectedSort, onUserDelete }) => {
     },
   };
   return (
-    <table className="table">
-      <TableHeader {...{ onSort, selectedSort, columns }} />
-      <TableBody {...{ columns, data: users }} />
-      {/* <tbody>
-        <User users={users} onUserDelete={onItemDelete} />
-      </tbody> */}
-    </table>
+    <Table
+      onSort={onSort}
+      selectedSort={selectedSort}
+      columns={columns}
+      data={users}
+    />
+    //   {/* <TableHeader {...{ onSort, selectedSort, columns }} />
+    //   <TableBody {...{ columns, data: users }} />
+    // </Table> */}
   );
 };
 
