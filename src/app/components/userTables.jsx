@@ -2,10 +2,15 @@ import User from "./user";
 import TableHeader from "./tableHeader";
 import TableBody from "./tableBody";
 import Bookmark from "./bookmark";
+import QualitiesList from "./qualitiesList";
+
 const UserTable = ({ users, onSort, selectedSort, onUserDelete }) => {
   const columns = {
     name: { path: "name", name: "Имя" },
-    qualities: { name: "Качества" },
+    qualities: {
+      name: "Качества",
+      component: (user) => <QualitiesList qualities={user.qualities} />,
+    },
     professions: { path: "profession.name", name: "Профессия" },
     completedMeetings: { path: "completedMeetings", name: "Встретился, раз" },
     rate: { path: "rate", name: "Оценка" },
