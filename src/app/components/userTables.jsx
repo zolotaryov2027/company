@@ -1,10 +1,15 @@
 import Bookmark from "./bookmark";
 import QualitiesList from "./qualitiesList";
 import Table from "./table";
+import { Link } from "react-router-dom";
 
 const UserTable = ({ users, onSort, selectedSort, onUserDelete }) => {
   const columns = {
-    name: { path: "name", name: "Имя" },
+    name: {
+      path: "name",
+      name: "Имя",
+      component: (user) => <Link to={`/users/${user._id}`}>{user.name}</Link>,
+    },
     qualities: {
       name: "Качества",
       component: (user) => <QualitiesList qualities={user.qualities} />,
@@ -32,9 +37,6 @@ const UserTable = ({ users, onSort, selectedSort, onUserDelete }) => {
       columns={columns}
       data={users}
     />
-    //   {/* <TableHeader {...{ onSort, selectedSort, columns }} />
-    //   <TableBody {...{ columns, data: users }} />
-    // </Table> */}
   );
 };
 

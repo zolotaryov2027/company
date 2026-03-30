@@ -6,7 +6,7 @@ import SearchStatus from "./searchStatus";
 import Pagination from "./pagination";
 import GroupList from "./groupList";
 import UserTable from "./userTables";
-const Users = () => {
+const UsersList = () => {
   const [professions, setProfessions] = useState();
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
@@ -94,4 +94,4 @@ const Users = () => {
   return "Подождите идет загрузка";
 };
 
-export default Users;
+export default UsersList;
