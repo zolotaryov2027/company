@@ -1,4 +1,4 @@
-const TextField = ({ label, type = "text", name, value, onChange }) => {
+const TextField = ({ label, type = "text", name, value, onChange, error }) => {
   return (
     <div>
       <label htmlFor={name}>{label}</label>
@@ -9,6 +9,7 @@ const TextField = ({ label, type = "text", name, value, onChange }) => {
         name={name}
         onChange={onChange}
       />
+      {error && <p>{error}</p>}
     </div>
   );
 };
