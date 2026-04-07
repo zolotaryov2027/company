@@ -8,6 +8,7 @@ import GroupList from "./groupList";
 import UserTable from "./userTables";
 const UsersList = () => {
   const [professions, setProfessions] = useState();
+  const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState({ iter: "name", order: "asc" });
   const pageSize = 8;
@@ -31,8 +32,14 @@ const UsersList = () => {
   };
 
   const handleProfessionSelect = (item) => {
+    if (searchQuery !== "") setSearchQuery("");
     setSelectedProf(item);
     setCurrentPage(1);
+  };
+
+  const handleSearchQuery = ({ target }) => {
+    setSelectedProf(undefined);
+    setSearchQuery(target.value);
   };
 
   const handleSort = (item) => {
@@ -40,12 +47,17 @@ const UsersList = () => {
   };
 
   if (users) {
-    const usersFiltered = selectedProf
+    const usersFiltered = searchQuery
       ? users.filter(
           (user) =>
-            JSON.stringify(user.profession) === JSON.stringify(selectedProf),
+            user.name.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1,
         )
-      : users;
+      : selectedProf
+        ? users.filter(
+            (user) =>
+              JSON.stringify(user.profession) === JSON.stringify(selectedProf),
+          )
+        : users;
 
     const count = usersFiltered.length;
     const sortedUsers = _.orderBy(usersFiltered, [sortBy.path], [sortBy.order]);
@@ -71,6 +83,13 @@ const UsersList = () => {
         )}
         <div className="column-right flex-grow-1 m-2">
           <SearchStatus length={count} />
+          <input
+            type="text"
+            name="searchQuery"
+            placeholder="Search..."
+            onChange={handleSearchQuery}
+            value={searchQuery}
+          />
           {count > 0 && (
             <UserTable
               users={userCrop}
