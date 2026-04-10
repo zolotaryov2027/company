@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import paginate from "../utils/paginate";
-import api from "../api";
+import paginate from "../../../utils/paginate";
+import api from "../../../api";
 import _ from "lodash";
-import SearchStatus from "./searchStatus";
-import Pagination from "./pagination";
-import GroupList from "./groupList";
-import UserTable from "./userTables";
-const UsersList = () => {
+import SearchStatus from "../../ui/searchStatus";
+import Pagination from "../../common/pagination";
+import GroupList from "../../common/groupList";
+import UserTable from "../../ui/userTables";
+const UsersListPage = () => {
   const [professions, setProfessions] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -113,4 +113,4 @@ const UsersList = () => {
   return "Подождите идет загрузка";
 };
 
-export default UsersList;
+export default UsersListPage;

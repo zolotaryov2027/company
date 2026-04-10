@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API from "../api";
-import QualitiesList from "./qualitiesList";
+import API from "../../../api";
+import QualitiesList from "../../ui/qualities/qualitiesList";
 
 const UserPage = ({ userId }) => {
   const history = useNavigate();
